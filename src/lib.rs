@@ -2,9 +2,10 @@
 
 // mod client;
 // mod utils;
-mod cmd_vel_move_base;
-mod client;
-mod utils;
+mod move_base;
+mod node;
+mod laser_scan_2d;
 
-pub use crate::client::*;
-pub use cmd_vel_move_base::*;
+pub use node::*;
+pub use move_base::*;
+pub use laser_scan_2d::*;

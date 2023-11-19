@@ -1,24 +1,24 @@
 use arci::*;
-use crate::client::GzClient;
-
 use rgz::msgs::{Twist, Vector3d};
-use rgz::transport::Publisher;
+use rgz::transport;
+
+use crate::Node;
 use tracing::info;
 
-pub struct GzCmdVelMoveBase {
-    publisher: Publisher<Twist>,
+pub struct GzMoveBase {
+    publisher: transport::Publisher<Twist>,
 }
 
-impl GzCmdVelMoveBase {
-    pub fn new(client: &GzClient, cmd_topic_name: &str) -> Self {
-        let publisher = client.node().advertise::<Twist>(cmd_topic_name, None).unwrap();
+impl GzMoveBase {
+    pub fn new(node: Node, cmd_topic_name: &str) -> Self {
+        let publisher = node.create_publisher(cmd_topic_name).unwrap();
         Self {
             publisher,
         }
     }
 }
 
-impl MoveBase for GzCmdVelMoveBase {
+impl MoveBase for GzMoveBase {
     fn send_velocity(&self, velocity: &BaseVelocity) -> Result<(), Error> {
         let mut twist = Twist { ..Default::default() };
         twist.linear = Some(Vector3d {

@@ -17,10 +17,13 @@ serde = "1"
 tokio = { version = "1", features = ["sync", "parking_lot"] }
 tracing = "0.1"
 
-rgz = { version = "0.1.1", features = ["transport"] }
+futures = "0.3.29"
+
+rgz = { version = "0.2.0", features = ["transport"] }
 
 [dev-dependencies]
 tokio = { version = "1", features = ["full"]}
 
 [patch.crates-io]
-rgz = { path = "../rgz" }
+rgz = { path = "../rgz", features = ["transport"] }
+arci = { path = "../openrr/arci" }
