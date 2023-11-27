@@ -3,7 +3,6 @@
 /// https://gazebosim.org/docs/harmonic/sensors
 ///
 
-use std::env;
 use anyhow::Result;
 use arci::{BaseVelocity, LaserScan2D, MoveBase};
 use tokio::signal;
@@ -12,8 +11,6 @@ use arci_rgz::{GzMoveBase, Node, GzLaserScan2D};
 
 #[tokio::main]
 async fn main() -> Result<()> {
-    env::set_var("GZ_IP", "172.17.0.1");
-
     let node = Node::new(None);
     let node_clone = node.clone();
 
